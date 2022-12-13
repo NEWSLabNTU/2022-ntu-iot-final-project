@@ -2,11 +2,23 @@
 
 ## Files
 
+This Git repository has git-submodules. Please initialize them if you
+haven't done it yet.
+
+```bash
+git submodule init
+git submodule update --recursive
 ```
-repo/src/
+
+The `src/` directory should look like this. Please explicitly check
+each directory listed below must contain files and must not be empty.
+
+```
+src/
 ├── iot_agent/
 ├── carla_autoware_bridge_plus/
 ├── carla-ros-bridge/
+│   └── carla_msgs/
 └── astuff_sensor_msgs/
 ```
 
@@ -73,5 +85,5 @@ Suppose that your Carla server port is 2005.  Launch the simulation
 like this:
 
 ```bash
-./launch.sh 2007
+./launch.sh 2005
 ```
