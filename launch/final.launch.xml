@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="carla_host" default="127.0.0.1" description="Carla server address"/>
+  <arg name="carla_port" default="2000" description="Carla server port"/>
+  <arg name="carla_timeout_millis" default="20000" description="Carla client connection timeout"/>
+
+  <node pkg="carla_autoware_bridge_plus" exec="carla_autoware_bridge_plus" name="carla_autoware_bridge_plus">
+    <param name="carla_host" value="$(var carla_host)"/>
+    <param name="carla_port" value="$(var carla_port)"/>
+    <param name="carla_timeout_millis" value="$(var carla_timeout_millis)"/>
+  </node>
+
+  <node pkg="iot_agent" exec="iot_agent" name="iot_agent">
+  </node>
+</launch>
