@@ -1,0 +1,9 @@
+[submodule "src/carla-ros-bridge"]
+	path = src/carla-ros-bridge
+	url = https://github.com/NEWSLabNTU/ros-bridge.git
+[submodule "src/astuff_sensor_msgs"]
+	path = src/astuff_sensor_msgs
+	url = https://github.com/astuff/astuff_sensor_msgs.git
+[submodule "src/carla_autoware_bridge_plus"]
+	path = src/carla_autoware_bridge_plus
+	url = https://github.com/NEWSLabNTU/carla_autoware_bridge_plus.git
