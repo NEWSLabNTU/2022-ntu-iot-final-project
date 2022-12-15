@@ -1,13 +1,12 @@
 # NTU IoT 2022 Course Final Project
 
-## Files
+## Preparation
 
 This Git repository has git-submodules. Please initialize them if you
 haven't done it yet.
 
 ```bash
-git submodule init
-git submodule update --recursive
+git submodule update --init --recursive
 ```
 
 The `src/` directory should look like this. Please explicitly check
@@ -20,6 +19,13 @@ src/
 ├── carla-ros-bridge/
 │   └── carla_msgs/
 └── astuff_sensor_msgs/
+```
+
+Before compilation, please run this command to install
+dependencies. It only needs to be done once.
+
+```bash
+make prepare
 ```
 
 ## Build
