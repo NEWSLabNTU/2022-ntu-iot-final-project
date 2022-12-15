@@ -17,9 +17,10 @@ build_judge:
 	poetry install
 
 prepare:
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh /dev/stdin -y
 	cargo install --git https://github.com/jerry73204/cargo-ament-build.git
 	pip3 install git+https://github.com/jerry73204/colcon-ros-cargo.git@merge-colcon-cargo
+	rosdep install --from-paths src --ignore-src -r
 
 clean:
 	rm -rf build install log
