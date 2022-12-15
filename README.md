@@ -93,3 +93,15 @@ like this:
 ```bash
 ./launch.sh 2005
 ```
+
+## Write Your Car Agent
+
+The car agent source code is located at
+`src/iot_agent/iot_agent/agent.py`, which controls the car in the
+simulator through ROS topics.
+
+It's not required to `make` again after the code is changed. Simply
+run `make launch` to test your agent.
+
+During simulation, you may run `ros2 topic list` commands to inspect
+available topics.
