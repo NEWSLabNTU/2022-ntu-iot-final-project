@@ -21,6 +21,7 @@ prepare:
 	curl -sSL https://install.python-poetry.org | python3 -
 	cargo install --git https://github.com/jerry73204/cargo-ament-build.git
 	pip3 install git+https://github.com/jerry73204/colcon-ros-cargo.git@merge-colcon-cargo
+	pip3 install https://github.com/usdot-fhwa-stol/opendrive2lanelet/archive/develop.zip
 	rosdep install --from-paths src --ignore-src -r
 
 clean:
