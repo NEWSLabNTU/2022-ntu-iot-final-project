@@ -9,8 +9,9 @@ from . import qos
 # from package_name.msg import Message1, Message2
 from sensor_msgs.msg import PointCloud2
 from nav_msgs.msg import Odometry
-from carla_msgs.msg import CarlaEgoVehicleControl
 from std_msgs.msg import Empty
+from autoware_control_msgs.msg import Control
+from carla_msgs.msg import CarlaEgoVehicleControl
 
 # Define a ROS node as a class
 class Agent(Node):
@@ -24,8 +25,8 @@ class Agent(Node):
 
         #  Create a publisher
         self.control_pub = self.create_publisher(
-            CarlaEgoVehicleControl,  # Message type. Try to discover by `ros2 interface`.
-            "/carla/vehicle/hero/control_cmd",  # Please change this
+            Control,  # Message type. Try to discover by `ros2 interface`.
+            "/carla/vehicle/hero/ackermann_cmd",  # Please change this
             qos.best_effort(),  # QoS
         )
 
@@ -60,27 +61,25 @@ class Agent(Node):
     def tick_callback(self, _msg):
         # Please refer to
         # https://carla.readthedocs.io/projects/ros-bridge/en/latest/ros_msgs/
-        msg = CarlaEgoVehicleControl()
+        msg = Control()
 
         time = self.get_clock().now().to_msg()
-        msg.header.stamp = time
-        msg.header.frame_id = ""
+        msg.stamp = time
+        msg.control_time = time
 
-        # An example periodic controller
-        if (self.n_ticks // 50) % 2 == 1:
-            throttle = 0.0
-            brake = 1.0
-        else:
-            throttle = 0.5
-            brake = 0.0
+        msg.lateral.stamp = time
+        msg.lateral.control_time = time
+        msg.lateral.steering_tire_angle = 0.0
+        msg.lateral.steering_tire_rotation_rate = 0.0
+        msg.lateral.is_defined_steering_tire_rotation_rate = False
 
-        msg.throttle = throttle
-        msg.steer = 0.0
-        msg.brake = brake
-        msg.hand_brake = False
-        msg.reverse = False
-        msg.gear = 0
-        msg.manual_gear_shift = False
+        msg.longitudinal.stamp = time
+        msg.longitudinal.control_time = time
+        msg.longitudinal.velocity = 1.0
+        msg.longitudinal.acceleration = 0.0
+        msg.longitudinal.jerk = 0.0
+        msg.longitudinal.is_defined_acceleration = True
+        msg.longitudinal.is_defined_jerk = False
 
         self.control_pub.publish(msg)
         self.n_ticks += 1
