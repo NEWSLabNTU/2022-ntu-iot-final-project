@@ -392,7 +392,7 @@ def on_collision(vehicle, event, state):
 
     vehicle.collision_history.append((event.frame, intensity))
     if len(vehicle.collision_history) > 4000:
-        vehicle.history.pop(0)
+        vehicle.collision_history.pop(0)
 
 
 def on_lane_invasion(vehicle, event, state):
