@@ -101,7 +101,7 @@ The car agent source code is located at
 simulator through ROS topics.
 
 It's not required to `make` again after the code is changed. Simply
-run `make launch` to test your agent.
+run `./launch.sh` to test your agent.
 
 During simulation, you may run `ros2 topic list` commands to inspect
 available topics.
