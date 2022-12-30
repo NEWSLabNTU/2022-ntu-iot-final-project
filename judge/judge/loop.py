@@ -424,7 +424,7 @@ def on_lane_invasion(vehicle, event, state):
                 return
 
     for mark in event.crossed_lane_markings:
-        if mark.type != carla.LaneMarkingType.Broken:
+        if mark.type != carla.LaneMarkingType.Broken and mark.type != carla.LaneMarkingType.NONE:
             violated = True
             break
 
