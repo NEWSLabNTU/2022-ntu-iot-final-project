@@ -11,6 +11,7 @@ from sensor_msgs.msg import PointCloud2
 from nav_msgs.msg import Odometry
 from carla_msgs.msg import CarlaEgoVehicleControl
 from std_msgs.msg import Empty
+from autoware_auto_mapping_msgs.srv import HADMapService
 
 # Define a ROS node as a class
 class Agent(Node):
@@ -52,6 +53,20 @@ class Agent(Node):
             self.tick_callback,
             qos.best_effort(),
         )
+
+        self.map_client = self.create_client(HADMapService, "/carla/map")
+        req = HADMapService.Request()
+        req.requested_primitives = [0]
+        req.geom_upper_bound = [0.0, 0.0, 0.0]
+        req.geom_lower_bound = [0.0, 0.0, 0.0]
+        future = self.map_client.call_async(req)
+        rclpy.spin_until_future_complete(self, future)
+        resp = future.result()
+
+        map_data = resp.map.data
+
+        with open("map.osm", "wb") as f:
+            f.write(map_data)
 
         # Create a timer that periodically scans available topics
         timer_period = 0.1  # in seconds
